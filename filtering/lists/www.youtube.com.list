@@ -1,0 +1,35 @@
+# This is a simple filter list for YouTube as an example
+# DNS/Request/Response Blocking and Altering supports regex
+# DNS Block List for YouTube
+[DNS]
+.*doubleclick\.net.*
+
+# Request Blocking
+[Request]
+.+pagead.*
+.+/stats/ads.*
+.+/ad_break.*
+.+log_event.*
+.+/api/stats.*
+
+# Response Blocking/Altering
+[Response]
+.*base\.js.* replace("(.?\.?)(playerResponse|ytInitialPlayerResponse)\.adPlacements", "undefined")
+
+# Element Removal by query selector
+[Elements]
+.ytd-action-companion-ad-renderer
+.ytd-display-ad-renderer
+.ytd-promoted-video-renderer
+.style-scope .ytd-promoted-sparkles-web-renderer
+.style-scope .ytd-rich-grid-renderer .banner-promo-style-type-masthead-v2
+[id="masthead-ad"]
+
+# Prune Entries Parsed with JSON.Parse
+[Prune]
+[].playerResponse.adPlacements
+[].playerResponse.playerAds
+playerResponse.adPlacements
+playerResponse.playerAds
+adPlacements
+playerAds
